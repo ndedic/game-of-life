@@ -1,25 +1,26 @@
 <html>
-<canvas id="grid0" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
-<canvas id="grid1" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
-<canvas id="grid2" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
-<canvas id="grid3" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
-<canvas id="grid4" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
-<canvas id="grid5" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
-<canvas id="grid6" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
-<canvas id="grid7" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
+    <title>Conway's Game of Life</title>
+<body>    
+</body>
 <script src="game-of-life.js"></script>
-<script>
-    for (let i = 0; i <= 7; i++) {
-        create('grid'+i);
-    }
-    function create(id) {
-        const grid = new Grid(8, 8);
-        const canvas = document.getElementById(id);
+<script>    
+    let container = document.querySelector('body'); 
+    
+    for (let i = 0; i < 9; i++) {
+        
+        const canvas = document.createElement('canvas');        
+        canvas.width = 250;
+        canvas.height = 250;
+        container.appendChild(canvas);
+
+        const dimension = Math.round(Math.random() * (50 - 5) + 5);
+        const grid = new Grid(dimension, dimension);
         const drawer = new CanvasDrawer(canvas);
+        
         setInterval(() => {
             grid.tick();
             drawer.draw(grid);        
-        }, 200);
+        }, Math.round(Math.random() * (1000 - 10) + 10));
     }
     </script>
 
