@@ -1,5 +1,5 @@
 interface Drawer {
-    draw();
+    draw(grid: Grid);
 }
 
 class CanvasDrawer implements Drawer {
@@ -7,24 +7,23 @@ class CanvasDrawer implements Drawer {
     private canvas: HTMLCanvasElement;
     private grid: Grid;
 
-    constructor(canvas: HTMLCanvasElement, grid: Grid) {
+    constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
-        this.grid = grid;
     }
 
-    draw() {
+    draw(grid: Grid) {
 
         const c = this.canvas;
         const ctx = c.getContext('2d');
-        const xLimit = this.grid.getWidth();
-        const yLimit = this.grid.getHeight();
-        const cellWidth = 10;
-        const cellHeight = 10;
+        const xLimit = grid.getWidth();
+        const yLimit = grid.getHeight();
+        const cellWidth = Math.floor(c.width / grid.getWidth());
+        const cellHeight = Math.floor(c.height / grid.getHeight());
 
         for (let i = 0; i < xLimit; i++) {
-            for (let j = 0; j < yLimit; j++) {                
-                let cell = this.grid.getCells()[i][j];
-                ctx.fillStyle = cell.getState() === CellState.Alive ? 'black': 'white';
+            for (let j = 0; j < yLimit; j++) {
+                let cell = grid.getCells()[i][j];
+                ctx.fillStyle = cell.getState() === CellState.Alive ? 'black' : 'white';
                 ctx.fillRect(cell.getX() * cellWidth, cell.getY() * cellHeight, cellWidth, cellHeight);
             }
         }
