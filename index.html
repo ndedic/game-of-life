@@ -1,0 +1,29 @@
+<html>
+<canvas id="grid0" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
+<canvas id="grid1" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
+<canvas id="grid2" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
+<canvas id="grid3" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
+<canvas id="grid4" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
+<canvas id="grid5" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
+<canvas id="grid6" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
+<canvas id="grid7" width="300" height="300" style="border:2px solid #d3d3d3;"></canvas>
+<script src="game-of-life.js"></script>
+<script>
+
+    for (let i = 0; i <= 7; i++) {
+        create('grid'+i);
+    }
+
+    function create(id) {
+        const grid = new Grid(8, 8);
+        const canvas = document.getElementById(id);
+        const drawer = new CanvasDrawer(canvas);
+        setInterval(() => {
+            grid.tick();
+            drawer.draw(grid);        
+        }, 200);
+    }
+
+    </script>
+
+</html>

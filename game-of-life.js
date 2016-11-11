@@ -1,18 +1,17 @@
 var CanvasDrawer = (function () {
-    function CanvasDrawer(canvas, grid) {
+    function CanvasDrawer(canvas) {
         this.canvas = canvas;
-        this.grid = grid;
     }
-    CanvasDrawer.prototype.draw = function () {
+    CanvasDrawer.prototype.draw = function (grid) {
         var c = this.canvas;
         var ctx = c.getContext('2d');
-        var xLimit = this.grid.getWidth();
-        var yLimit = this.grid.getHeight();
-        var cellWidth = 10;
-        var cellHeight = 10;
+        var xLimit = grid.getWidth();
+        var yLimit = grid.getHeight();
+        var cellWidth = Math.floor(c.width / grid.getWidth());
+        var cellHeight = Math.floor(c.height / grid.getHeight());
         for (var i = 0; i < xLimit; i++) {
             for (var j = 0; j < yLimit; j++) {
-                var cell = this.grid.getCells()[i][j];
+                var cell = grid.getCells()[i][j];
                 ctx.fillStyle = cell.getState() === CellState.Alive ? 'black' : 'white';
                 ctx.fillRect(cell.getX() * cellWidth, cell.getY() * cellHeight, cellWidth, cellHeight);
             }
