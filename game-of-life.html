@@ -1,0 +1,13 @@
+<html>
+<canvas id="grid" width="600" height="600" style="border:2px solid #d3d3d3;"></canvas>
+<script src="game-of-life.js"></script>
+<script>
+    const grid = new Grid(60, 60);
+    const canvas = document.getElementById('grid');
+
+    setInterval(() => {
+        grid.tick();
+        new CanvasDrawer(canvas, grid).draw();        
+    }, 500);
+    </script>
+</html>
